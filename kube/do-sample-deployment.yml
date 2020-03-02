@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: do-kubernetes-sample-app
+  namespace: default
+  labels:
+    app: do-kubernetes-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: do-kubernetes-sample-app
+  template:
+    metadata:
+      labels:
+        app: do-kubernetes-sample-app
+    spec:
+      containers:
+        - name: do-kubernetes-sample-app
+          image: kmpartner/do-kubernetes-sample-app:latest
+          ports:
+          - containerPort: 80
+            name: http
+          resources:
+            requests:
+              memory: "1Mi"
+              cpu: "1m"
+            limits:
+              memory: "10Mi"
+              cpu: "10m"
